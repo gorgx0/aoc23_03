@@ -12,11 +12,17 @@ func TestEmptyGetPositionsOfSymbols(t *testing.T) {
 
 func TestGetPositionsOfSymbols(t *testing.T) {
 	matrix := [][]string{
-		{".", "#"},
 		{".", "."},
+		{".", "#"},
+	}
+	expected := []position{
+		{x: 1, y: 1},
 	}
 	positions := GetPositionsOfSymbols(matrix)
 	if len(positions) != 1 {
 		t.Errorf("Expected 1 positions, got %v", positions)
+	}
+	if positions[0] != expected[0] {
+		t.Errorf("Expected %v, got %v", expected, positions)
 	}
 }
