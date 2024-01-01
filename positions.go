@@ -19,7 +19,7 @@ func GetPositionsOfSymbols(matrix [][]string) []position {
 	return positions
 }
 
-func GetPositionsWithNumbersNearSymbolPositions(symbolPosition position, matrix [][]string) []position {
+func GetPositionsWithNumbersNearSymbolPosition(symbolPosition position, matrix [][]string) []position {
 	var result []position
 	for i := symbolPosition.x - 1; i <= symbolPosition.x+1; i++ {
 		for j := symbolPosition.y - 1; j <= symbolPosition.y+1; j++ {
