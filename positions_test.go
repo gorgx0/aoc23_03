@@ -54,6 +54,17 @@ func TestGetPositionsOfSymbols2(t *testing.T) {
 				{x: 1, y: 1},
 			},
 		},
+		{
+			name: "bigger matrix",
+			matrix: [][]string{
+				{".", ".", "."},
+				{".", "#", "."},
+				{".", ".", "."},
+			},
+			expected: []position{
+				{x: 1, y: 1},
+			},
+		},
 	}
 
 	for _, testCase := range testCases {
