@@ -10,29 +10,42 @@ func TestEmptyGetPositionsOfSymbols(t *testing.T) {
 	}
 }
 
-func TestGetPositionsOfSymbols(t *testing.T) {
-	matrix := [][]string{
-		{".", "."},
-		{".", "#"},
-	}
-	expected := []position{
-		{x: 1, y: 1},
-	}
-	positions := GetPositionsOfSymbols(matrix)
-	if len(positions) != 1 {
-		t.Errorf("Expected 1 positions, got %v", positions)
-	}
-	if positions[0] != expected[0] {
-		t.Errorf("Expected %v, got %v", expected, positions)
-	}
-}
-
 func TestGetPositionsOfSymbols2(t *testing.T) {
 	testCases := []struct {
+		name     string
 		matrix   [][]string
 		expected []position
 	}{
 		{
+			name:     "empty matrix",
+			matrix:   nil,
+			expected: nil,
+		},
+		{
+			name: "single no symbol",
+			matrix: [][]string{
+				{"."},
+			},
+			expected: nil,
+		},
+		{
+			name: "single number",
+			matrix: [][]string{
+				{"7"},
+			},
+			expected: nil,
+		},
+		{
+			name: "single symbol",
+			matrix: [][]string{
+				{"#"},
+			},
+			expected: []position{
+				{x: 0, y: 0},
+			},
+		},
+		{
+			name: "one symbol",
 			matrix: [][]string{
 				{".", "."},
 				{".", "#"},
@@ -44,6 +57,7 @@ func TestGetPositionsOfSymbols2(t *testing.T) {
 	}
 
 	for _, testCase := range testCases {
+		t.Log(testCase.name)
 		positions := GetPositionsOfSymbols(testCase.matrix)
 		if len(positions) != len(testCase.expected) {
 			t.Errorf("Expected %v positions, got %v", len(testCase.expected), len(positions))
