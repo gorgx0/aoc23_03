@@ -4,10 +4,9 @@ func GetPositionsOfSymbols(matrix [][]string) []position {
 	var positions []position
 	for i, row := range matrix {
 		for j, symbol := range row {
-			if symbol == "." {
-				break
+			if symbol != "." {
+				positions = append(positions, position{x: i, y: j})
 			}
-			positions = append(positions, position{x: i, y: j})
 		}
 	}
 	return positions

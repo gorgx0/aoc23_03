@@ -12,7 +12,8 @@ func TestEmptyGetPositionsOfSymbols(t *testing.T) {
 
 func TestGetPositionsOfSymbols(t *testing.T) {
 	matrix := [][]string{
-		{"#"},
+		{".", "#"},
+		{".", "."},
 	}
 	positions := GetPositionsOfSymbols(matrix)
 	if len(positions) != 1 {
