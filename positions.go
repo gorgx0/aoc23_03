@@ -9,7 +9,7 @@ type position struct {
 
 func GetNumberStartingAtPosition(position position, matrix [][]string) string {
 	var result string
-	result = matrix[position.x][position.y]
+	result = matrix[position.y][position.x]
 	return result
 }
 

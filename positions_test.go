@@ -22,12 +22,12 @@ func TestGetNumberStartingAtPosition(t *testing.T) {
 			expectedNumber: "1",
 		},
 		{
-			name: "2x2 matrix with one number at position 0,1",
+			name: "2x2 matrix with one number at position 0,0",
 			matrix: [][]string{
 				{"1", "."},
 				{".", "."},
 			},
-			position:       position{x: 0, y: 1},
+			position:       position{x: 0, y: 0},
 			expectedNumber: "1",
 		},
 	}
