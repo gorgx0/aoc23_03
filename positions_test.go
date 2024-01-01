@@ -4,6 +4,43 @@ import (
 	"testing"
 )
 
+func TestGetNumberStartingAtPosition(t *testing.T) {
+	testCases := []struct {
+		name           string
+		matrix         [][]string
+		position       position
+		expectedNumber string
+	}{
+		{
+			name: "1x1 matrix",
+			matrix: [][]string{
+				{
+					"1",
+				},
+			},
+			position:       position{x: 0, y: 0},
+			expectedNumber: "1",
+		},
+		{
+			name: "2x2 matrix with one number at position 0,1",
+			matrix: [][]string{
+				{"1", "."},
+				{".", "."},
+			},
+			position:       position{x: 0, y: 1},
+			expectedNumber: "1",
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Log(testCase.name)
+		number := GetNumberStartingAtPosition(testCase.position, testCase.matrix)
+		if number != testCase.expectedNumber {
+			t.Errorf("Expected %v, got %v", testCase.expectedNumber, number)
+		}
+	}
+}
+
 func TestGetPositionsWithNumbersNearSymbolPosition(t *testing.T) {
 	tc := []struct {
 		name     string

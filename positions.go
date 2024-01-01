@@ -7,6 +7,12 @@ type position struct {
 	y int
 }
 
+func GetNumberStartingAtPosition(position position, matrix [][]string) string {
+	var result string
+	result = matrix[position.x][position.y]
+	return result
+}
+
 func GetPositionsOfSymbols(matrix [][]string) []position {
 	var positions []position
 	for i, row := range matrix {
