@@ -1,6 +1,42 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
+
+func TestGetNumberNearPosition(t *testing.T) {
+	testCases := []struct {
+		name           string
+		matrix         [][]string
+		position       position
+		expectedNumber string
+	}{
+		{
+			name: "empty matrix",
+			matrix: [][]string{
+				{},
+			},
+			position: position{x: 0, y: 0},
+		},
+		{
+			name: "2x2 matrix with one number at position 0,1",
+			matrix: [][]string{
+				{"1", "."},
+				{".", "."},
+			},
+			position:       position{x: 0, y: 1},
+			expectedNumber: "1",
+		},
+	}
+
+	for _, testCase := range testCases {
+		t.Log(testCase.name)
+		number := GetNumberNearPosition(testCase.position, testCase.matrix)
+		if number != testCase.expectedNumber {
+			t.Errorf("Expected %v, got %v", testCase.expectedNumber, number)
+		}
+	}
+}
 
 func TestEmptyGetPositionsOfSymbols(t *testing.T) {
 	matrix := [][]string{}

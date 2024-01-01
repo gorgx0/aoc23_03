@@ -15,24 +15,6 @@ func main() {
 		}
 	}
 
-	positions := getAllSymbolsPositions(matrix)
+	positions := GetPositionsOfSymbols(matrix)
 	println(positions)
-}
-
-type position struct {
-	x int
-	y int
-}
-
-func getAllSymbolsPositions(matrix [][]string) []position {
-	var positions []position
-	for i, row := range matrix {
-		for j, symbol := range row {
-			if symbol == "." {
-				break
-			}
-			positions = append(positions, position{x: i, y: j})
-		}
-	}
-	return positions
 }
