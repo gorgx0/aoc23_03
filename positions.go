@@ -10,6 +10,13 @@ type position struct {
 func GetNumberStartingAtPosition(position position, matrix [][]string) string {
 	var result string
 	result = matrix[position.y][position.x]
+	for i := position.x + 1; i < len(matrix[position.y]); i++ {
+		if isNumber(matrix[position.y][i]) {
+			result += matrix[position.y][i]
+		} else {
+			break
+		}
+	}
 	return result
 }
 

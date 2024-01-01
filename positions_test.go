@@ -30,6 +30,15 @@ func TestGetNumberStartingAtPosition(t *testing.T) {
 			position:       position{x: 0, y: 0},
 			expectedNumber: "1",
 		},
+		{
+			name: "2x2 matrix with two digits at position 0,0",
+			matrix: [][]string{
+				{"1", "2"},
+				{".", "."},
+			},
+			position:       position{x: 0, y: 0},
+			expectedNumber: "12",
+		},
 	}
 
 	for _, testCase := range testCases {
