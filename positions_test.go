@@ -76,6 +76,17 @@ func TestGetPositionsOfSymbols2(t *testing.T) {
 				{".", ".", ".", ".", "."},
 			},
 			expected: []position{},
+		}, {
+			name: "5x5 matrix with symbols",
+			matrix: [][]string{
+				{".", ".", ".", ".", "."},
+				{".", ".", ".", ".", "."},
+				{".", ".", "#", ".", "."},
+				{".", ".", ".", ".", "."},
+				{".", ".", ".", ".", "."},
+			}, expected: []position{
+				{x: 2, y: 2},
+			},
 		},
 	}
 
