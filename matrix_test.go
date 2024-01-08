@@ -4,6 +4,45 @@ import (
 	"testing"
 )
 
+func TestGetNumbersWithPositions(t *testing.T) {
+
+	tests := []struct {
+		name   string
+		matrix [][]string
+		want   []numberWithPosition
+	}{
+		{
+			"5x5 matrix",
+			[][]string{
+				{".", "2", "2", ".", "."},
+				{".", ".", ".", ".", "."},
+				{".", "4", "5", "#", "."},
+				{".", ".", ".", ".", "."},
+				{".", ".", ".", ".", "."},
+			},
+			[]numberWithPosition{
+				{number: "22", position: position{x: 1, y: 0}},
+				{number: "45", position: position{x: 1, y: 2}},
+			},
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			result := GetNumbersWithPositions(test.matrix)
+			if len(result) != len(test.want) {
+				t.Errorf("GetNumbersWithSymbols(%v) = %v, want %v", test.matrix, result, test.want)
+			} else {
+				for i, numberPosition := range result {
+					if numberPosition.number != test.want[i].number || numberPosition.position.x != test.want[i].position.x || numberPosition.position.y != test.want[i].position.y {
+						t.Errorf("GetNumbersWithSymbols(%v) = %v, want %v", test.matrix, result, test.want)
+					}
+				}
+			}
+		})
+	}
+}
+
 func TestIsSymbol(t *testing.T) {
 	tests := []struct {
 		name     string
