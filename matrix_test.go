@@ -28,6 +28,18 @@ func TestGetNumbersWithPositions(t *testing.T) {
 			},
 			[]numberWithPosition{{number: "4", position: position{x: 1, y: 1}}},
 		}, {
+			"3,3 matrix with numbers in each row",
+			[][]string{
+				{"1", "2", "3"},
+				{"4", "5", "6"},
+				{"7", "8", "9"},
+			},
+			[]numberWithPosition{
+				{number: "123", position: position{x: 0, y: 0}},
+				{number: "456", position: position{x: 0, y: 1}},
+				{number: "789", position: position{x: 0, y: 2}},
+			},
+		}, {
 			"3,3 matrix with number at 0,0 1,1 2,2",
 			[][]string{
 				{"1", ".", "."},
