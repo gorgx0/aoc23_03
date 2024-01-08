@@ -28,6 +28,7 @@ func GetNumbersWithPositions(matrix [][]string) []numberWithPosition {
 	var result []numberWithPosition
 	var tmp numberWithPosition
 	for y, row := range matrix {
+		tmp = numberWithPosition{}
 		x := 0
 		for x < len(row) {
 			if isNumber(matrix[y][x]) {
@@ -42,6 +43,15 @@ func GetNumbersWithPositions(matrix [][]string) []numberWithPosition {
 				}
 			}
 			x++
+		}
+		if tmp.number != "" {
+			result = append(result, tmp)
+			continue
+		}
+		if isNumber(matrix[y][x-1]) {
+			tmp.number = matrix[y][x-1]
+			tmp.position = position{x: x - 1, y: y}
+			result = append(result, tmp)
 		}
 	}
 	return result

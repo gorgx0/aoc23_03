@@ -12,17 +12,61 @@ func TestGetNumbersWithPositions(t *testing.T) {
 		want   []numberWithPosition
 	}{
 		{
+			"3,3 matrix",
+			[][]string{
+				{".", ".", "."},
+				{".", ".", "."},
+				{".", ".", "."},
+			},
+			[]numberWithPosition{},
+		}, {
+			"3,3 matrix with number at 1,1",
+			[][]string{
+				{".", ".", "."},
+				{".", "4", "."},
+				{".", ".", "."},
+			},
+			[]numberWithPosition{{number: "4", position: position{x: 1, y: 1}}},
+		}, {
+			"3,3 matrix with number at 0,0 1,1 2,2",
+			[][]string{
+				{"1", ".", "."},
+				{".", "2", "."},
+				{".", ".", "3"},
+			},
+			[]numberWithPosition{
+				{number: "1", position: position{x: 0, y: 0}},
+				{number: "2", position: position{x: 1, y: 1}},
+				{number: "3", position: position{x: 2, y: 2}},
+			},
+		}, {
+			"3,3 matrix with number at 0,0 1,1 1,2",
+			[][]string{
+				{"1", "1", "."},
+				{".", "2", "2"},
+				{".", "3", "3"},
+			},
+			[]numberWithPosition{
+				{number: "11", position: position{x: 0, y: 0}},
+				{number: "22", position: position{x: 1, y: 1}},
+				{number: "33", position: position{x: 1, y: 2}},
+			},
+		}, {
 			"5x5 matrix",
 			[][]string{
 				{".", "2", "2", ".", "."},
 				{".", ".", ".", ".", "."},
 				{".", "4", "5", "#", "."},
-				{".", ".", ".", ".", "."},
-				{".", ".", ".", ".", "."},
+				{".", ".", "7", "8", "9"},
+				{"1", ".", "5", ".", "7"},
 			},
 			[]numberWithPosition{
 				{number: "22", position: position{x: 1, y: 0}},
 				{number: "45", position: position{x: 1, y: 2}},
+				{number: "789", position: position{x: 2, y: 3}},
+				{number: "1", position: position{x: 0, y: 4}},
+				{number: "5", position: position{x: 2, y: 4}},
+				{number: "7", position: position{x: 4, y: 4}},
 			},
 		},
 	}
