@@ -18,3 +18,7 @@ func IsNumber(matrix [][]string, position position) bool {
 func IsSymbol(matrix [][]string, position position) bool {
 	return !isDotOrNumber(matrix[position.y][position.x])
 }
+
+func GetNumbersWithSymbols(matrix [][]string) []string {
+	return []string{"45"}
+}

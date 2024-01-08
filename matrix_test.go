@@ -4,6 +4,42 @@ import (
 	"testing"
 )
 
+func TestGetNumbersWithSymbols(t *testing.T) {
+
+	tests := []struct {
+		name   string
+		matrix [][]string
+		want   []string
+	}{
+		{
+			"5x5 matrix",
+			[][]string{
+				{".", ".", ".", ".", "."},
+				{".", ".", ".", ".", "."},
+				{".", "4", "5", "#", "."},
+				{".", ".", ".", ".", "."},
+				{".", ".", ".", ".", "."},
+			},
+			[]string{"45"},
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			result := GetNumbersWithSymbols(test.matrix)
+			if len(result) != len(test.want) {
+				t.Errorf("GetNumbersWithSymbols(%v) = %v, want %v", test.matrix, result, test.want)
+			} else {
+				for i, number := range result {
+					if number != test.want[i] {
+						t.Errorf("GetNumbersWithSymbols(%v) = %v, want %v", test.matrix, result, test.want)
+					}
+				}
+			}
+		})
+	}
+}
+
 func TestIsSymbol(t *testing.T) {
 	tests := []struct {
 		name     string
