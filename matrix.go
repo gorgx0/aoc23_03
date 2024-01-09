@@ -65,19 +65,64 @@ func FilterOutNumbersWithSymbols(matrix [][]string) []string {
 	numbersWithPosition := GetNumbersWithPositions(matrix)
 	log.Println(numbersWithPosition)
 
+FOUND:
 	for _, numberWithPosition := range numbersWithPosition {
-		xLeft := numberWithPosition.position.x - 1
-		xRight := numberWithPosition.position.x + len(numberWithPosition.number)
-		yUp := numberWithPosition.position.y - 1
-		//yDown := numberWithPosition.position.y + 1
 
-		if yUp >= 0 {
-			if xLeft >= 0 {
-				for x := xLeft; x < xRight; x++ {
-					if IsSymbol(matrix, position{x: x, y: yUp}) {
-						result = append(result, numberWithPosition.number)
-						break
-					}
+		checkLeft := numberWithPosition.position.x-1 >= 0
+		checkRight := numberWithPosition.position.x+len(numberWithPosition.number) < len(matrix[0])
+		checkUp := numberWithPosition.position.y-1 >= 0
+		checkDown := numberWithPosition.position.y+1 < len(matrix)
+
+		yStart := numberWithPosition.position.y - 1
+		xStart := numberWithPosition.position.x - 1
+		yEnd := numberWithPosition.position.y + 1
+		xEnd := numberWithPosition.position.x + len(numberWithPosition.number)
+
+		if !checkLeft {
+			xStart = 0
+		}
+		if !checkRight {
+			xEnd = len(matrix[0]) - 1
+		}
+		if !checkUp {
+			yStart = 0
+		}
+		if !checkDown {
+			yEnd = len(matrix) - 1
+		}
+
+		if checkUp {
+			for x := xStart; x <= xEnd; x++ {
+				if IsSymbol(matrix, position{x: x, y: yStart}) {
+					result = append(result, numberWithPosition.number)
+					continue FOUND
+				}
+			}
+		}
+
+		if checkDown {
+			for x := xStart; x <= xEnd; x++ {
+				if IsSymbol(matrix, position{x: x, y: yEnd}) {
+					result = append(result, numberWithPosition.number)
+					continue FOUND
+				}
+			}
+		}
+
+		if checkLeft {
+			for y := yStart; y <= yEnd; y++ {
+				if IsSymbol(matrix, position{x: xStart, y: y}) {
+					result = append(result, numberWithPosition.number)
+					continue FOUND
+				}
+			}
+		}
+
+		if checkRight {
+			for y := yStart; y <= yEnd; y++ {
+				if IsSymbol(matrix, position{x: xEnd, y: y}) {
+					result = append(result, numberWithPosition.number)
+					continue FOUND
 				}
 			}
 		}

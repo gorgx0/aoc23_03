@@ -12,11 +12,83 @@ func TestFilterOutNumbersWithSymbols(t *testing.T) {
 		want   []string
 	}{
 		{
-			"4x4 matrix without two digit numer at 1,1 and symbol above",
+			"4x4 matrix without two digit number at 1,1 and symbol above",
 			[][]string{
 				{".", "#", ".", "."},
 				{".", "1", "2", "."},
 				{".", ".", ".", "."},
+				{".", ".", ".", "."},
+			},
+			[]string{"12"},
+		}, {
+			"4x4 matrix without two digit number at 1,1 and symbol below",
+			[][]string{
+				{".", ".", ".", "."},
+				{".", "1", "2", "."},
+				{".", "#", ".", "."},
+				{".", ".", ".", "."},
+			},
+			[]string{"12"},
+		}, {
+			"4x4 matrix without two digit number at 1,1 and symbol left",
+			[][]string{
+				{".", ".", ".", "."},
+				{"#", "1", "2", "."},
+				{".", ".", ".", "."},
+				{".", ".", ".", "."},
+			},
+			[]string{"12"},
+		}, {
+			"4x4 matrix without two digit number at 1,1 and symbol right",
+			[][]string{
+				{".", ".", ".", "."},
+				{".", "1", "2", "#"},
+				{".", ".", ".", "."},
+				{".", ".", ".", "."},
+			},
+			[]string{"12"},
+		}, {
+			"4x4 matrix without two digit number at 1,1 and symbol left above",
+			[][]string{
+				{"#", ".", ".", "."},
+				{".", "1", "2", "."},
+				{".", ".", ".", "."},
+				{".", ".", ".", "."},
+			},
+			[]string{"12"},
+		}, {
+			"4x4 matrix without two digit number at 1,1 and symbol right above",
+			[][]string{
+				{".", ".", ".", "#"},
+				{".", "4", "2", "."},
+				{".", ".", ".", "."},
+				{".", ".", ".", "."},
+			},
+			[]string{"42"},
+		}, {
+			"4x4 matrix without two digit number at 1,1 and symbol left below",
+			[][]string{
+				{".", ".", ".", "."},
+				{".", "1", "2", "."},
+				{"#", ".", ".", "."},
+				{".", ".", ".", "."},
+			},
+			[]string{"12"},
+		}, {
+			"4x4 matrix without two digit number at 1,1 and symbol right below",
+			[][]string{
+				{".", ".", ".", "."},
+				{".", "1", "2", "."},
+				{".", ".", ".", "#"},
+				{".", ".", ".", "."},
+			},
+			[]string{"12"},
+		}, {
+			"4x4 matrix without two digit number at 1,1 and symbol right below",
+			[][]string{
+				{".", ".", ".", "."},
+				{".", "1", "2", "."},
+				{"#", ".", ".", "."},
 				{".", ".", ".", "."},
 			},
 			[]string{"12"},
