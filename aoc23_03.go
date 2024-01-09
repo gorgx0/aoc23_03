@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	input, err := readInput("test.txt")
+	input, err := readInput("input.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -15,6 +15,6 @@ func main() {
 		}
 	}
 
-	positions := GetPositionsOfSymbols(matrix)
-	println(positions)
+	sum := GetSumOfNumbersNearSymbols(matrix)
+	println(sum)
 }
