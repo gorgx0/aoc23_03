@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestFindStars(t *testing.T) {
 	tests := []struct {
@@ -53,6 +55,54 @@ func TestFindStars(t *testing.T) {
 }
 
 func equalPositions(got []position, want []position) bool {
+	if len(got) != len(want) {
+		return false
+	}
+	for i := range got {
+		if got[i] != want[i] {
+			return false
+		}
+	}
+	return true
+}
+
+func TestFindPart2GearNumbers(t *testing.T) {
+	tests := []struct {
+		name   string
+		matrix [][]string
+		want   []gear
+	}{
+		{
+			name: "3x3 matrix with 0 gear",
+			matrix: [][]string{
+				{"3", ".", "5"},
+				{".", "#", "."},
+				{".", ".", "."},
+			},
+			want: []gear{},
+		}, {
+			name: "3x3 matrix with 1 gear",
+			matrix: [][]string{
+				{"4", ".", "."},
+				{".", "*", "7"},
+				{".", ".", "."},
+			},
+			want: []gear{
+				{num0: "4", num1: "7"},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := FindPart2GearNumbers(tt.matrix); !equalGears(got, tt.want) {
+				t.Errorf("FindPart2GearNumbers() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func equalGears(got []gear, want []gear) bool {
 	if len(got) != len(want) {
 		return false
 	}

@@ -1,5 +1,7 @@
 package main
 
+import "log"
+
 func FindStars(matrix [][]string) []position {
 	var result []position
 	for y, row := range matrix {
@@ -9,5 +11,20 @@ func FindStars(matrix [][]string) []position {
 			}
 		}
 	}
+	return result
+}
+
+type gear struct {
+	num0 string
+	num1 string
+}
+
+func FindPart2GearNumbers(matrix [][]string) []gear {
+	result := []gear{}
+
+	numbersWithPositions := GetNumbersWithPositions(matrix)
+	stars := FindStars(matrix)
+	log.Println(stars)
+	log.Println(numbersWithPositions)
 	return result
 }
