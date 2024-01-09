@@ -1,7 +1,7 @@
 package main
 
 func main() {
-	input, err := readInput("input.txt")
+	input, err := readInput("test.txt")
 	if err != nil {
 		panic(err)
 	}

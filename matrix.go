@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"strconv"
 )
 
@@ -66,7 +65,6 @@ func FilterOutNumbersWithSymbols(matrix [][]string) []string {
 	var result []string
 
 	numbersWithPosition := GetNumbersWithPositions(matrix)
-	log.Println("numbersWithPosition", numbersWithPosition)
 
 FOUND:
 	for _, numberWithPosition := range numbersWithPosition {
@@ -136,7 +134,6 @@ FOUND:
 func GetSumOfNumbersNearSymbols(matrix [][]string) int {
 	var result int
 	numbersWithSymbols := FilterOutNumbersWithSymbols(matrix)
-	log.Println("numbersWithSymbols", numbersWithSymbols)
 	for _, number := range numbersWithSymbols {
 		number, err := strconv.Atoi(number)
 		if err != nil {
