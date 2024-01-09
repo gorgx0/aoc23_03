@@ -1,5 +1,7 @@
 package main
 
+import "log"
+
 type numberWithPosition struct {
 	number   string
 	position position
@@ -52,6 +54,32 @@ func GetNumbersWithPositions(matrix [][]string) []numberWithPosition {
 			tmp.number = matrix[y][x-1]
 			tmp.position = position{x: x - 1, y: y}
 			result = append(result, tmp)
+		}
+	}
+	return result
+}
+
+func FilterOutNumbersWithSymbols(matrix [][]string) []string {
+	var result []string
+
+	numbersWithPosition := GetNumbersWithPositions(matrix)
+	log.Println(numbersWithPosition)
+
+	for _, numberWithPosition := range numbersWithPosition {
+		xLeft := numberWithPosition.position.x - 1
+		xRight := numberWithPosition.position.x + len(numberWithPosition.number)
+		yUp := numberWithPosition.position.y - 1
+		//yDown := numberWithPosition.position.y + 1
+
+		if yUp >= 0 {
+			if xLeft >= 0 {
+				for x := xLeft; x < xRight; x++ {
+					if IsSymbol(matrix, position{x: x, y: yUp}) {
+						result = append(result, numberWithPosition.number)
+						break
+					}
+				}
+			}
 		}
 	}
 	return result

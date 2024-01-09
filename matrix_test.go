@@ -4,6 +4,42 @@ import (
 	"testing"
 )
 
+func TestFilterOutNumbersWithSymbols(t *testing.T) {
+
+	tests := []struct {
+		name   string
+		matrix [][]string
+		want   []string
+	}{
+		{
+			"4x4 matrix without two digit numer at 1,1 and symbol above",
+			[][]string{
+				{".", "#", ".", "."},
+				{".", "1", "2", "."},
+				{".", ".", ".", "."},
+				{".", ".", ".", "."},
+			},
+			[]string{"12"},
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			result := FilterOutNumbersWithSymbols(test.matrix)
+			if len(result) != len(test.want) {
+				t.Errorf("FilterOutNumbersWithSymbols(%v) = %v, want %v", test.matrix, result, test.want)
+			} else {
+				for i, number := range result {
+					if number != test.want[i] {
+						t.Errorf("FilterOutNumbersWithSymbols(%v) = %v, want %v", test.matrix, result, test.want)
+					}
+				}
+			}
+		})
+	}
+
+}
+
 func TestGetNumbersWithPositions(t *testing.T) {
 
 	tests := []struct {
