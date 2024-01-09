@@ -4,6 +4,59 @@ import (
 	"testing"
 )
 
+func TestGetSumOfNumbersNearSymbols(t *testing.T) {
+	tests := []struct {
+		name   string
+		matrix [][]string
+		want   int
+	}{
+		{
+			"3x3 matrix with number and symbol at 1,1",
+			[][]string{
+				{".", ".", "#"},
+				{".", "1", "."},
+				{".", ".", "."},
+			},
+			1,
+		}, {
+			"6x6 matrix with number at 1,1",
+			[][]string{
+				{"1", ".", "2", "2", ".", "."},
+				{".", ".", "$.", ".", ".", "."},
+				{".", ".", ".", ".", ".", "#"},
+				{".", "4", "4", ".", ".", "4"},
+				{".", ".", ".", ".", ".", "."},
+				{"%", "5", ".", ".", ".", "."},
+			},
+			31,
+		}, {
+			"example matrix",
+			[][]string{
+				{"4", "6", "7", ".", ".", "1", "1", "4", ".", "."},
+				{".", ".", ".", "*", ".", ".", ".", ".", ".", "."},
+				{".", ".", "3", "5", ".", ".", "6", "3", "3", "."},
+				{".", ".", ".", ".", ".", ".", "#", ".", ".", "."},
+				{"6", "1", "7", "*", ".", ".", ".", ".", ".", "."},
+				{".", ".", ".", ".", ".", "+", ".", "5", "8", "."},
+				{".", ".", "5", "9", "2", ".", ".", ".", ".", "."},
+				{".", ".", ".", ".", ".", ".", "7", "5", "5", "."},
+				{".", ".", ".", "$", ".", "*", ".", ".", ".", "."},
+				{".", "6", "6", "4", ".", "5", "9", "8", ".", "."},
+			},
+			4361,
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			result := GetSumOfNumbersNearSymbols(test.matrix)
+			if result != test.want {
+				t.Errorf("GetSumOfNumbersNearSymbols(%v) = %v, want %v", test.matrix, result, test.want)
+			}
+		})
+	}
+}
+
 func TestFilterOutNumbersWithSymbols(t *testing.T) {
 
 	tests := []struct {
@@ -12,7 +65,7 @@ func TestFilterOutNumbersWithSymbols(t *testing.T) {
 		want   []string
 	}{
 		{
-			"4x4 matrix without two digit number at 1,1 and symbol above",
+			"4x4 matrix with two digit number at 1,1 and symbol above",
 			[][]string{
 				{".", "#", ".", "."},
 				{".", "1", "2", "."},
@@ -21,7 +74,7 @@ func TestFilterOutNumbersWithSymbols(t *testing.T) {
 			},
 			[]string{"12"},
 		}, {
-			"4x4 matrix without two digit number at 1,1 and symbol below",
+			"4x4 matrix with two digit number at 1,1 and symbol below",
 			[][]string{
 				{".", ".", ".", "."},
 				{".", "1", "2", "."},
@@ -30,7 +83,7 @@ func TestFilterOutNumbersWithSymbols(t *testing.T) {
 			},
 			[]string{"12"},
 		}, {
-			"4x4 matrix without two digit number at 1,1 and symbol left",
+			"4x4 matrix with two digit number at 1,1 and symbol left",
 			[][]string{
 				{".", ".", ".", "."},
 				{"#", "1", "2", "."},
@@ -39,7 +92,7 @@ func TestFilterOutNumbersWithSymbols(t *testing.T) {
 			},
 			[]string{"12"},
 		}, {
-			"4x4 matrix without two digit number at 1,1 and symbol right",
+			"4x4 matrix with two digit number at 1,1 and symbol right",
 			[][]string{
 				{".", ".", ".", "."},
 				{".", "1", "2", "#"},
@@ -48,7 +101,7 @@ func TestFilterOutNumbersWithSymbols(t *testing.T) {
 			},
 			[]string{"12"},
 		}, {
-			"4x4 matrix without two digit number at 1,1 and symbol left above",
+			"4x4 matrix with two digit number at 1,1 and symbol left above",
 			[][]string{
 				{"#", ".", ".", "."},
 				{".", "1", "2", "."},
@@ -57,7 +110,7 @@ func TestFilterOutNumbersWithSymbols(t *testing.T) {
 			},
 			[]string{"12"},
 		}, {
-			"4x4 matrix without two digit number at 1,1 and symbol right above",
+			"4x4 matrix with two digit number at 1,1 and symbol right above",
 			[][]string{
 				{".", ".", ".", "#"},
 				{".", "4", "2", "."},
@@ -66,7 +119,7 @@ func TestFilterOutNumbersWithSymbols(t *testing.T) {
 			},
 			[]string{"42"},
 		}, {
-			"4x4 matrix without two digit number at 1,1 and symbol left below",
+			"4x4 matrix with two digit number at 1,1 and symbol left below",
 			[][]string{
 				{".", ".", ".", "."},
 				{".", "1", "2", "."},
@@ -75,7 +128,7 @@ func TestFilterOutNumbersWithSymbols(t *testing.T) {
 			},
 			[]string{"12"},
 		}, {
-			"4x4 matrix without two digit number at 1,1 and symbol right below",
+			"4x4 matrix with two digit number at 1,1 and symbol right below",
 			[][]string{
 				{".", ".", ".", "."},
 				{".", "1", "2", "."},
@@ -84,7 +137,7 @@ func TestFilterOutNumbersWithSymbols(t *testing.T) {
 			},
 			[]string{"12"},
 		}, {
-			"4x4 matrix without two digit number at 1,1 and symbol right below",
+			"4x4 matrix with two digit number at 1,1 and symbol right below",
 			[][]string{
 				{".", ".", ".", "."},
 				{".", "1", "2", "."},
@@ -92,6 +145,45 @@ func TestFilterOutNumbersWithSymbols(t *testing.T) {
 				{".", ".", ".", "."},
 			},
 			[]string{"12"},
+		}, {
+			"4x4 matrix with two digit number at 0,1 and symbol right below",
+			[][]string{
+				{".", ".", ".", "."},
+				{"1", "5", ".", "."},
+				{".", ".", "#", "."},
+				{".", ".", ".", "."},
+			},
+			[]string{"15"},
+		}, {
+			"4x4 matrix with two digit number at 0,1 and symbol right below",
+			[][]string{
+				{".", ".", "#", "."},
+				{"1", "5", ".", "."},
+				{".", ".", ".", "."},
+				{".", ".", ".", "."},
+			},
+			[]string{"15"},
+		}, {
+			"5x5 matrix with two digit number at 3,2 and symbol right below",
+			[][]string{
+				{".", ".", "#", ".", "."},
+				{".", ".", ".", ".", "."},
+				{".", ".", ".", "5", "6"},
+				{".", ".", "$", ".", "."},
+				{".", ".", ".", ".", "."},
+			},
+			[]string{"56"},
+		}, {
+			"6x6 matrix without digits",
+			[][]string{
+				{"6", "2", ".", "2", "3", "."},
+				{".", ".$", ".", ".", ".", "."},
+				{".", ".", ".", ".", ".", "."},
+				{".", ".", ".", ".", ".", "."},
+				{".", ".", ".", ".", ".", "."},
+				{".", ".", ".", ".", ".", "."},
+			},
+			[]string{"62"},
 		},
 	}
 

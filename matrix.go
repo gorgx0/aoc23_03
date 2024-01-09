@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"log"
+	"strconv"
+)
 
 type numberWithPosition struct {
 	number   string
@@ -63,7 +66,7 @@ func FilterOutNumbersWithSymbols(matrix [][]string) []string {
 	var result []string
 
 	numbersWithPosition := GetNumbersWithPositions(matrix)
-	log.Println(numbersWithPosition)
+	log.Println("numbersWithPosition", numbersWithPosition)
 
 FOUND:
 	for _, numberWithPosition := range numbersWithPosition {
@@ -126,6 +129,20 @@ FOUND:
 				}
 			}
 		}
+	}
+	return result
+}
+
+func GetSumOfNumbersNearSymbols(matrix [][]string) int {
+	var result int
+	numbersWithSymbols := FilterOutNumbersWithSymbols(matrix)
+	log.Println("numbersWithSymbols", numbersWithSymbols)
+	for _, number := range numbersWithSymbols {
+		number, err := strconv.Atoi(number)
+		if err != nil {
+			panic(err)
+		}
+		result += number
 	}
 	return result
 }
